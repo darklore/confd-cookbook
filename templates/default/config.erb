@@ -1,0 +1,8 @@
+[template]
+src = "<%= @src %>"
+dest = "<%= @dest %>"
+keys = [
+<% @keys.each do |k| -%>
+  "<%= k %>",
+<% end -%>
+]
