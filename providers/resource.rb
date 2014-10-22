@@ -10,7 +10,14 @@ action :create do
       :name => new_resource.name,
       :src => new_resource.src,
       :dest => new_resource.dest,
-      :keys => new_resource.keys
+      :keys => new_resource.keys,
+
+      :prefix => new_resource.prefix,
+      :owner => new_resource.owner,
+      :group => new_resource.group,
+      :mode => new_resource.mode,
+      :reload_cmd => new_resource.reload_cmd,
+      :check_cmd => new_resource.check_cmd
     )
   end
 end
