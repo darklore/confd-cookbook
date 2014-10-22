@@ -1,37 +1,18 @@
 backend = "<%= @backend %>"
-<% if @client_cert -%>
+client_cakeys = "<%= @client_cakeys %>"
 client_cert = "<%= @client_cert %>"
-<% end -%>
-<% if @client_key -%>
 client_key = "<%= @client_key %>"
-<% end -%>
 confdir = "<%= @confdir %>"
-<% if @debug -%>
 debug = <%= @debug %>
-<% end -%>
-<% if @interval %>
 interval = <%= @interval %>
-<% end -%>
 nodes = [
 <% @nodes.each do |node| %>
   "<%= node %>",
 <% end -%>
 ]
-<% if @noop %>
 noop = <%= @noop %>
-<% end -%>
-<% if @prefix -%>
 prefix = "<%= @prefix %>"
-<% end -%>
-<% if @quiet -%>
 quiet = <%= @quiet %>
-<% end -%>
-<% if @scheme -%>
 scheme = "<%= @scheme %>"
-<% end -%>
-<% if @srv_domain -%>
 srv_domain = "<%= @srv_domain %>"
-<% end -%>
-<% if @verbose -%>
 verbose = <%= @verbose %>
-<% end -%>

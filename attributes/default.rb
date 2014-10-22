@@ -6,8 +6,21 @@ default['confd']['checksums'] = {
 }
 
 default['confd']['config_dir'] = '/etc/confd'
-default['confd']['resource_config_dir'] = '/etc/confd/conf.d'
+default['confd']['resource_dir'] = '/etc/confd/conf.d'
 default['confd']['template_dir'] = '/etc/confd/templates'
 
 default['confd']['backend'] = 'etcd'
-default['confd']['nodes'] = []
+default['confd']['client_cakeys'] = ''
+default['confd']['client_cert'] = ''
+default['confd']['client_key'] = ''
+
+default['confd']['debug'] = false
+default['confd']['interval'] = 600
+default['confd']['nodes'] = ['http://127.0.0.1:4001']
+default['confd']['noop'] = false
+default['confd']['prefix'] = '/'
+default['confd']['quiet'] = false
+default['confd']['scheme'] = 'http'
+default['confd']['srv_domain'] = ''
+default['confd']['verbose'] = false
+default['confd']['watch'] = false

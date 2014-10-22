@@ -1,6 +1,6 @@
 action :create do
-  template "#{node['confd']['resource_config_dir']}/#{new_resource.name}" do
-    source 'config.erb'
+  template "#{node['confd']['resource_dir']}/#{new_resource.name}" do
+    source 'resource.erb'
     cookbook 'confd'
     owner 'root'
     group 'root'

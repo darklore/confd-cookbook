@@ -17,7 +17,7 @@ remote_file File.join(node['confd']['install_dir'], 'confd') do
   action :create
 end
 
-[node['confd']['resource_config_dir'], node['confd']['template_dir']].each do |dir|
+[node['confd']['resource_dir'], node['confd']['template_dir']].each do |dir|
   directory dir do
     owner 'root'
     group 'root'
@@ -33,8 +33,20 @@ template "#{node['confd']['config_dir']}/confd.toml" do
   mode '0644'
   action :create
   variables(
-    :backend => node['confd']['backend'],
-    :confdir => node['confd']['config_dir'],
-    :nodes => node['confd']['nodes'],
+   :backend => node['confd']['backend'],
+   :client_cakeys => node['confd']['client_cakeys'],
+   :client_cert => node['confd']['client_cert'],
+   :client_key => node['confd']['client_key'],
+   :confdir => node['confd']['config_dir'],
+   :debug => node['confd']['debug'],
+   :interval => node['confd']['interval'],
+   :nodes => node['confd']['nodes'],
+   :noop => node['confd']['noop'],
+   :prefix => node['confd']['prefix'],
+   :quiet => node['confd']['quiet'],
+   :scheme => node['confd']['scheme'],
+   :srv_domain => node['confd']['srv_domain'],
+   :verbose => node['confd']['verbose'],
+   :watch => node['confd']['watch']
   )
 end
