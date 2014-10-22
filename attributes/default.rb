@@ -16,7 +16,7 @@ default['confd']['client_key'] = ''
 
 default['confd']['debug'] = false
 default['confd']['interval'] = 600
-default['confd']['nodes'] = ['http://127.0.0.1:4001']
+default['confd']['nodes'] = ['127.0.0.1:4001']
 default['confd']['noop'] = false
 default['confd']['prefix'] = '/'
 default['confd']['quiet'] = false
