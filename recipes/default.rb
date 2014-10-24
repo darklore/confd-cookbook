@@ -8,6 +8,7 @@ install_arch = node['kernel']['machine'] =~ /x86_64/ ? 'amd64' : '386'
 install_version = [node['confd']['version'], node['os'], install_arch].join('_')
 install_checksum = node['confd']['checksums'].fetch(install_version)
 
+# Install confd
 remote_file File.join(node['confd']['install_dir'], 'confd') do
   source "https://github.com/kelseyhightower/confd/releases/download/v#{node['confd']['version']}/confd-#{node['confd']['version']}-linux-amd64"
   checksum install_checksum
@@ -17,6 +18,7 @@ remote_file File.join(node['confd']['install_dir'], 'confd') do
   action :create
 end
 
+# Create directories for configuration files
 [node['confd']['resource_dir'], node['confd']['template_dir']].each do |dir|
   directory dir do
     owner 'root'
@@ -27,7 +29,9 @@ end
   end
 end
 
-template "#{node['confd']['config_dir']}/confd.toml" do
+config_file = "#{node['confd']['config_dir']}/confd.toml"
+
+template config_file do
   owner 'root'
   group 'root'
   mode '0644'
@@ -49,4 +53,22 @@ template "#{node['confd']['config_dir']}/confd.toml" do
    :verbose => node['confd']['verbose'],
    :watch => node['confd']['watch']
   )
+end
+
+# Install init.d script
+template '/etc/init.d/confd' do
+  source 'confd-init.erb'
+  owner 'root'
+  group 'root'
+  mode '0755'
+  variables(
+    confd_binary: "#{node['confd']['install_dir']}/confd",
+    config_file: config_file
+  )
+end
+
+service 'confd' do
+  supports status: true, restart: true
+  action [:enable, :start]
+  subscribes :restart, "template[#{config_file}]", :delayed
 end
